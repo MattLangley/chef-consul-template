@@ -22,14 +22,14 @@ class Chef::Recipe::ConsulTemplateHelpers
     private
 
     def install_arch(machine_arch)
-      machine_arch.match?(/x86_64/) ? 'amd64' : '386'
+      machine_arch =~ /x86_64/ ? 'amd64' : '386'
     end
 
     # returns windows friendly version of the provided path,
     # ensures backslashes are used everywhere
     # Gently plucked from https://github.com/chef-cookbooks/windows
     def win_friendly_path(path)
-      path&.gsub(::File::SEPARATOR, ::File::ALT_SEPARATOR || '\\')
+      path.gsub(::File::SEPARATOR, ::File::ALT_SEPARATOR || '\\')
     end
 
     # Simply using ::File.join was causing several attributes
